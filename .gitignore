@@ -16,3 +16,5 @@ python/py2ipynb-test.py
 *.Rproj
 .ipynb_checkpoints/
 __pycache__/
+venv/
+old/
