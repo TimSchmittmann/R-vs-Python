@@ -1,17 +1,24 @@
 # @author: Tim Schmittmann
-
+#install.packages("Unicode")
 
 source("emoji_helper.R")
 source("csv_fixer.R")
 source("emoji_statistics.R")
+library(bit64)
+library(dplyr)
+library(stringr)
+library(rvest)
+library(Unicode)
+library(tm)
+library(ggplot2)
 
 start_at = 0
 
 # important settings. Excludes and Mappings are done by hand
-excludes_filepath = "data/manual-settings/emojis_to_exclude_1.csv"
+excludes_filepath = "../data/manual_settings/emojis_to_exclude_1.csv"
 # careful, this file gets overwritten by write_missing_emojis_in_mapping_file
-emoji_mappings_filepath = "data/manual-settings/emoji_mappings_2.csv"
-csv_to_fix = "data/trainingssets/top_1000_emoji_tweets_03_12_18"
+emoji_mappings_filepath = "../data/manual_settings/emoji_mappings_2.csv"
+csv_to_fix = "../data/trainingssets/top_1000_emoji_tweets_03_12_18"
 emoji_cnt_infix = "_emoji_cnt"
 
 # less important. Filenames for auto-generated files
@@ -35,19 +42,10 @@ if(start_at < 4) { csv_fixer.remove_similar(csv_to_fix, sorted_ext, similar_remo
 #if(start_at < 5) { csv_fixer.show_similar_tweets_example(csv_to_fix, sorted_ext) }
 if(start_at < 6) { csv_fixer.extract_emoji_labels(csv_to_fix, similar_removed_ext, labels_extracted_ext) }
 
-if(start_at < 7) {
-  # Since mappings are build by hand, we might miss some emojis.
-  # Add all emojis currently not in mappings file to bottom of mappings file.
-  emoji_helper.write_missing_emojis_in_mapping_file(csv_to_fix+labels_extracted_ext, emoji_mappings_filepath) 
-}
-
 csv_fixer.map_emoji_labels(csv_to_fix, labels_extracted_ext, labels_mapped_ext, emoji_mappings_filepath) 
 
-if(start_at < 8) { csv_fixer.exclude_emoji_labels(csv_to_fix, labels_mapped_ext, labels_excluded_ext, excludes) }
-if(start_at < 9) {
+if(start_at < 7) {
   # Count number of occurences in tweets (max +1 per tweet per emoji) for each emoji
-  # Only look at those csv files after label extraction for now.
-  emoji_statistics.write_emoji_cnt_file_from_label_extracted_tweet_file(csv_to_fix+labels_extracted_ext, csv_to_fix+emoji_cnt_infix+labels_extracted_ext) 
-  emoji_statistics.write_emoji_cnt_file_from_label_extracted_tweet_file(csv_to_fix+labels_mapped_ext, csv_to_fix+emoji_cnt_infix+labels_mapped_ext)
-  emoji_statistics.write_emoji_cnt_file_from_label_extracted_tweet_file(csv_to_fix+labels_excluded_ext, csv_to_fix+emoji_cnt_infix+labels_excluded_ext) 
+  # Only look at final csv file
+  emoji_statistics.write_emoji_cnt_file_from_label_extracted_tweet_file(paste0(csv_to_fix,labels_mapped_ext), paste0(csv_to_fix,emoji_cnt_infix,labels_mapped_ext))
 }
