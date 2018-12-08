@@ -1,0 +1,18 @@
+.httr-oauth
+data/emoji_tweets/
+data/word2vec/tweets_until_29_11_18_model2.model
+data/word2vec/tweets_until_29_11_18_model1.model
+data/word2vec/tweets_until_29_11_18.model.result
+data/word2vec/german.model
+data/manual-settings/emoji_mappings_2 - Kopie.csv
+python/binary_classification_word2vec.bak.ipynb
+python/binary_classification.laptop-bak.ipynb
+python/binary_classification.bak.ipynb
+python/main_tim_schmittmann-Copy1.ipynb
+python/py2ipynb-test.py
+.idea/
+.spyproject/
+*.Rhistory
+*.Rproj
+.ipynb_checkpoints/
+__pycache__/

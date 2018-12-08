@@ -1,0 +1,255 @@
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Source Sans Pro Regular'), local('SourceSansPro-Regular'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlAC5S7WFEeHRqL6ObGQGT8o.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Source Sans Pro Regular'), local('SourceSansPro-Regular'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlMgmx_L9kV4w6g8dYQOLFUI.woff2) format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Source Sans Pro Regular'), local('SourceSansPro-Regular'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlMODs9238LZG2v64UiBIjng.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Source Sans Pro Regular'), local('SourceSansPro-Regular'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlFjqPhnWKseBf12Mt9_m7kc.woff2) format('woff2');
+  unicode-range: U+0370-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Source Sans Pro Regular'), local('SourceSansPro-Regular'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlNOAHFN6BivSraYkjhveRHY.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Source Sans Pro Regular'), local('SourceSansPro-Regular'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlC2Q8seG17bfDXYR_jUsrzg.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Source Sans Pro Regular'), local('SourceSansPro-Regular'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlNV_2ngZ8dMf8fLgjYEouxg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+.hcenter {
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.adjust-up {
+  margin-top: -1em;
+}
+
+.adjust-up img {
+  margin-top: -2em;
+}
+
+.fill-image {
+  margin-top: -50px;
+  margin-left: -102px;
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif !important;
+  -webkit-print-color-adjust: exact;
+  font-size: calc(1rem + 1vw);
+  line-height: calc(1.1rem + 1vh);
+}
+
+@media (min-width: 1200px) {
+  body {
+    font-size: 32px;
+    line-height: 32px;
+  } 
+  
+}
+
+slides > slide {
+  font-size: 1em;
+  line-height: 1em;
+  height: 700px;
+  top: calc((100vh - 700px) /2);
+  margin: 0;
+  padding-top: 17vh;
+  padding-right: 1.6em;
+  padding-bottom: 7vh;
+  padding-left: calc(1.6em + 6.5vh);
+}
+
+slides > slide.current.title-slide ~ footer {
+  display: none;
+}
+
+footer {
+  position: absolute;
+  bottom: calc((100vh - 700px) /2 + 20px);
+  display: flex;
+  justify-content: space-between;
+  color: #002557;
+  padding-left: calc(1.6em + 6.5vh);
+}
+
+footer > span {
+  font-size: 12pt;
+}
+
+@media (min-width: 769px) {
+  slides > slide {
+    width: 32em;
+    left: calc((100vw - 32em) / 2);
+    max-width: 1200px;
+    min-width: 768px;
+  }
+  
+  footer {
+    width: calc(32em - 1.6em - 60px);
+    left: calc((100vw - 32em) / 2);
+    max-width: calc(1200px - 1.6em - 60px);
+    min-width: calc(768px - 1.6em - 60px);
+  }
+}
+
+@media (max-width: 768px) {
+  slides > slide {
+    left: 0;
+    width: 100vw;
+  }
+
+  footer {
+    width: calc(100vw - 1.6em - 60px);
+    left: 0;
+  }
+}
+
+.title-slide hgroup h1 {
+  font-size: 1.5em
+}
+
+slides > slide.backdrop {
+  background: white;
+}
+
+slides > slide h2 {
+  font-size: 1.3em;
+  line-height: 1em;
+}
+
+slides > slide pre {
+  font-size: 0.6em;
+  line-height: 1em;
+  left: 0;
+  width: 100%;
+}
+
+
+slides > slide .flex-columns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+slides > slide .flex-columns > img {
+  max-width: 33%;
+  margin: auto;
+}
+
+slides > slide.title-slide {
+  background: #1B3D6C; 
+  -webkit-print-color-adjust: exact;
+} 
+
+slides > slide:not(.title-slide) {
+  color: #002557
+} 
+slides > slide:not(.title-slide) h2 {
+  color: #A1A1A1
+}
+
+slides > slide:before {
+    content: "";
+    height: 2vh;
+    width: 220%;
+    display: block;
+    margin-left: -100%;
+    top: 12vh;
+    position: absolute;
+}
+
+slides > slide.title-slide:before {
+    /* font-size: 12pt; */
+    /* line-height: 3; */
+    border-top: 2px solid #FFF;
+    border-bottom: 2px solid #FFF;
+} 
+
+slides > slide:not(.title-slide):before {
+    border-top: 2px solid #A1A1A1;
+    border-bottom: 2px solid #A1A1A1;
+} 
+
+slides > slide.title-slide h1 {
+  color: #FFF;
+}
+
+slides > slide.title-slide hgroup > p {
+  color: #d3d3d3;
+}
+
+slides > slide.current.title-slide ~ .content-logos {
+  display: none;  
+}
+
+slides > slide.current:not(.title-slide) ~ .title-logos {
+  display: none;  
+}
+
+.top-logo > img {
+  position: absolute;
+  top: calc((100vh - 700px) / 2 + 3vh);
+  height: 6vh;
+}
+
+.tud-logo > img {
+  left: calc((100vw - 32em) / 2 + 32em * 5 / 100)
+}
+
+.dd-concept-logo > img {
+  right: calc((100vw - 32em) / 2 + 32em * 5 / 100)
+}
+
+@media (max-width: 768px) {
+  .tud-logo > img {
+    left: 5vw
+  }
+  
+  .dd-concept-logo > img {
+    right: 5vw
+  }
+}
