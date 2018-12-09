@@ -1,0 +1,255 @@
+---
+title: "Datenanalyse und Machine Learning:  R versus Python"
+author: "Tim Schmittmann"
+date: "10 Dezember 2018"
+output: 
+  ioslides_presentation: 
+    keep_md: yes
+runtime: shiny
+
+css: tu-ioslides.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(bit64)
+consumer_key <- "Rcvp7SPl08t4t3ZNM8e7qBWy1"
+consumer_secret <- "NqulWUlD8KpwYiaVdRUXg1dXuraTATNRk7vEYW26o9SAmYc4b7"
+access_token <- "1403526518-5YNK1GGKJKWSh5BNSojGYmtfQ0ZWLyVGASpsWus"
+access_secret <- "z5vgcSyeWw4BnEVHu8yZzFTNL966dNDfoNFvVUrBTrdNu"
+
+```
+```{r, include=FALSE}
+mappings = read.csv("../data/manual_settings/emojis.csv", sep=';', encoding="UTF-8")
+```
+
+<div class="title-logos">
+  <span class="top-logo tud-logo">![](img/logo_weiss.svg)</span>
+  <span class="top-logo dd-concept-logo">![](img/logo_dresden_concept.svg)</span>
+</div>
+
+<div class="content-logos">
+  <span class="top-logo tud-logo">![](img/logo_blau.svg)</span>
+  <span class="top-logo dd-concept-logo">![](img/DDC-03.png)</span>
+</div>
+
+<footer>
+  <span class="date">12.01.18</span>
+  <span class="title">Schneller schicke statistikbasierte Webseiten mit R und Shiny</span>
+  <span class="slide-nr">&nbsp;</span>
+</footer>
+
+## Gliederung
+
+- Problemstellung
+- Fakten
+- Vorbereitung
+-- Entwicklungsumgebung
+-- Erlernbarkeit
+- Datensammlung
+- Datenaufbereitung
+- Datenvisualisierung
+-- Shiny
+- Machine Learning
+- Fazit
+
+
+## Slide with Bullets
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+## Slide with mixed Output
+
+<div>
+```{python eval=FALSE}
+import twitter
+import pandas as pd
+api = twitter.Api(consumer_key, consumer_secret, access_token, access_secret)
+result = api.GetSearch(raw_query="q=♥&count=2")
+df = pd.DataFrame([[x.AsDict()["id"],x.AsDict()["text"]] for x in result])
+```
+</div>
+
+<div>
+```{r, eval=FALSE}
+library(twitteR)
+setup_twitter_oauth(consumer_key, consumer_secret, access_token, access_secret)
+search = twitteR::searchTwitter("♥", n = 2)
+df = twitteR::twListToDF(search)[,c("id", "text")]
+```
+</div>
+<div>
+```{r echo=FALSE}
+options(width=100)
+df = data.frame(id=c(1057766584515813378, 1057765893768404992), text=c("Wenn das Herz liebt ♥✌", "☺ Gute Nacht Köln♥♥"))
+print(df, right=FALSE)
+```
+</div>
+```{r, include=FALSE, eval = FALSE}
+# Real example isn't very good most of the time
+library(twitteR)
+capture.output(setup_twitter_oauth(consumer_key, consumer_secret, access_token, access_secret), file='NUL')
+search = twitteR::searchTwitter("♥", n = 2)
+df = twitteR::twListToDF(search)[,c("id", "text")]
+df[,"text"] <- sapply(df["text"], substring, 0,50) %>%
+                gsub("^RT\\s+", "", .)  %>%
+                gsub("https?://[^\\s]*", "", .)  %>%
+                gsub("[ \t]{2,}", "", .) %>%
+                gsub("^\\s+|\\s+$", "", .)
+df
+```
+
+## reading and saving files
+
+<div>
+```{python eval=FALSE}
+df.to_csv("data.csv", sep=";", encoding="UTF-8",header=["id","text"], index=False)
+
+df = pd.read_csv("data.csv", sep=";", encoding="UTF-8")
+```
+</div>
+
+<div>
+```{r, eval=FALSE}
+write.csv2(df, "data.csv", row.names = FALSE)
+
+df = read.csv("data.csv", sep=';', skip=1, header=FALSE, 
+              colClasses = c("integer64", "character"), encoding="UTF-8")
+names(df) = c("id","text")
+df = df[,c("id","text")]
+
+```
+</div>
+
+## datenaufbereitung
+
+<div>
+```{python eval=FALSE}
+df = df.replace({'\n': ' ', '\r': ' '}, regex=True)
+df = df.drop_duplicates(['text'])
+df = df.sort_index(ascending=False)
+            
+```
+</div>
+
+<div>
+```{r, eval=FALSE}
+df$text = gsub(pattern = "\n", replacement = " ", df$text)
+df = df[!duplicated(df[,"text"]),]
+df = df[order(df$id, decreasing = TRUE),]
+    
+```
+</div>
+
+## datenaufbereitung
+
+<div>
+```{python eval=FALSE}
+import emoji
+emoji_regex = "|".join(emoji.UNICODE_EMOJI).replace("*","\*")
+df.loc[:,'target'] = df.loc[:,'text'].apply(extract_emojis)
+df.loc[:,'text'] = df.loc[:,'text'].apply(lambda text: regex.sub(emoji_regex,"",text))            
+```
+</div>
+
+<div>
+```{r, eval=FALSE}
+df[, "text"] = gsub("<U+FE0F>", "", df[, "text"], fixed=TRUE)
+df[, "target"] = str_extract_all(df[,"text"], '<U\\+[0-9A-F]+>') %>% 
+                      lapply(paste, collapse = ",") %>%
+                      unlist(use.names=FALSE) 
+df[,"text"] = gsub('<U\\+[0-9A-F]+>', "", df[,"text"])
+  
+```
+</div>
+<div>
+```{r echo=FALSE}
+options(width=100)
+df = data.frame(id=c(1057766584515813378, 1057765893768404992), text=c("Wenn das Herz liebt ", "Gute Nacht Köln"), target=c("♥,✌","☺,♥,♥"))
+print(df)
+```
+</div>
+
+## Slide with Plot
+```{r include=FALSE}
+importdf = read.csv("../data/trainingssets/top_1000_emoji_tweets_03_12_18_6_labels_mapped.csv", sep=';', skip=1, header=FALSE, colClasses = c("integer64", "character", "character"), encoding="UTF-8")
+names(importdf) = c("id","text", "target")
+importdf = importdf[,c("id","text", "target")]
+#multi_class_labels=c('<U+1F602>','<U+2764>','<U+1F4AA>')
+# <U+0001F602>, <U+2764>, #U+0001F914#, U+0001F4AA, #U+0001F644#
+
+#venn_data = list()
+#for(label in multi_class_labels) {
+#  mapping = mappings[mappings[,'unicode'] ==  gsub("<|>", "", label),'EN'] %>%
+#    as.character
+#    
+#  print(mapping)
+#  print(label)
+#  venn_data[[mapping]] = importdf[str_count(importdf[,"target"],
+#                                          fixed(label)) > 0,"id"]
+#}
+#venn.plot <- venn.diagram(venn_data, NULL)
+#grid.draw(venn.plot)
+```
+
+```{r echo=FALSE}
+library(shiny)
+library(VennDiagram)
+
+importdf = read.csv("../data/trainingssets/top_1000_emoji_tweets_03_12_18_6_labels_mapped.csv", sep=';', skip=1, header=FALSE, colClasses = c("integer64", "character", "character"), encoding="UTF-8")
+names(importdf) = c("id","text", "target")
+importdf = importdf[,c("id","text", "target")]
+
+# 1) UI: Use Bootstrap Fluid Layout as UI for the App.  
+ui <- fluidPage(
+      # 1.1) Use slider from 1 to 50 for user interaction
+        div(
+          id = "controls",
+          inputPanel(
+            class="categorySelects",
+            selectInput("emoji1", "Emoji 1:", mappings[,"EN"], selected="red heart"),
+            selectInput("emoji2", "Emoji 2:", mappings[,"EN"], selected="flexed biceps"),
+            selectInput("emoji3", "Emoji 3:", mappings[,"EN"], selected="face with tears of joy")
+          )
+        ),
+
+      # 1.2) Generate textfield for text output
+      plotOutput("emojisSelected")
+)
+
+# 2) Define server logic. 
+# Input$number contains value of 1.1 
+# and is updated whenever the user moves the slider 
+server <- function(input, output) {
+  # Render text inside 1.2
+  output$emojisSelected <- renderPlot({
+    venn_data = list()
+      
+    multi_class_labels = c(
+      as.character(mappings[mappings[,"EN"] == input$emoji1, "unicode"]),
+      as.character(mappings[mappings[,"EN"] == input$emoji2, "unicode"]),
+      as.character(mappings[mappings[,"EN"] == input$emoji3, "unicode"]))
+    print(input$emoji1)
+    print(mappings[mappings[,"EN"] == input$emoji1, "unicode"])
+    print(multi_class_labels)
+    for(label in multi_class_labels) {
+      mapping = mappings[mappings[,'unicode'] ==  gsub("<|>", "", label),'EN'] %>% as.character
+      print(label)
+      venn_data[[mapping]] = rownames(importdf[str_count(importdf[,"target"],
+                                              gsub("U\\+","", label)) > 0,])
+    }
+    venn.plot <- venn.diagram(venn_data, filename = NULL)
+    
+    grid.draw(venn.plot)
+    #draw.triple.venn(65, 75, 85, 
+    #      35, 15, 25, 5, c("First", "Second", "Third"));
+  })
+}
+
+# 3) Create Shiny app with UI and server logic
+shinyApp(ui = ui, server = server)
+```
+
