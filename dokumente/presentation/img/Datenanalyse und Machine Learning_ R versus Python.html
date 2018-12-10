@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)http://127.0.0.1:6026/R-vs-Python.Rmd#1 -->
+<html class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  
+  <script type="application/shiny-singletons"></script>
+  <script type="application/html-dependencies">json2[2014.02.04];jquery[1.12.4];shiny[1.2.0]</script>
+<script src="./Datenanalyse und Machine Learning_ R versus Python_files/json2-min.js.Download"></script>
+<script src="./Datenanalyse und Machine Learning_ R versus Python_files/jquery.min.js.Download"></script>
+<link href="./Datenanalyse und Machine Learning_ R versus Python_files/shiny.css" rel="stylesheet">
+<script src="./Datenanalyse und Machine Learning_ R versus Python_files/shiny.min.js.Download"></script>  <script src="./Datenanalyse und Machine Learning_ R versus Python_files/rmd_loader.js.Download"></script>
+  <link href="./Datenanalyse und Machine Learning_ R versus Python_files/rmd_loader.css" rel="stylesheet">
+
+<link href="./Datenanalyse und Machine Learning_ R versus Python_files/css" rel="stylesheet"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" type="text/css" href="./Datenanalyse und Machine Learning_ R versus Python_files/bootstrap.min.css"><script src="./Datenanalyse und Machine Learning_ R versus Python_files/bootstrap.min.js.Download"></script><script src="./Datenanalyse und Machine Learning_ R versus Python_files/html5shiv.min.js.Download"></script><script src="./Datenanalyse und Machine Learning_ R versus Python_files/respond.min.js.Download"></script><link rel="stylesheet" type="text/css" href="./Datenanalyse und Machine Learning_ R versus Python_files/fonts.css"><link rel="stylesheet" type="text/css" href="./Datenanalyse und Machine Learning_ R versus Python_files/default.css"><link rel="stylesheet" type="text/css" href="./Datenanalyse und Machine Learning_ R versus Python_files/phone.css"><script src="./Datenanalyse und Machine Learning_ R versus Python_files/modernizr.custom.45394.js.Download"></script><script src="./Datenanalyse und Machine Learning_ R versus Python_files/prettify.js.Download"></script><script src="./Datenanalyse und Machine Learning_ R versus Python_files/lang-r.js.Download"></script><script src="./Datenanalyse und Machine Learning_ R versus Python_files/lang-yaml.js.Download"></script><script src="./Datenanalyse und Machine Learning_ R versus Python_files/hammer.js.Download"></script><script src="./Datenanalyse und Machine Learning_ R versus Python_files/slide-controller.js.Download"></script><script src="./Datenanalyse und Machine Learning_ R versus Python_files/slide-deck.js.Download"></script><link rel="stylesheet" type="text/css" href="./Datenanalyse und Machine Learning_ R versus Python_files/rmd_perf.css"><script src="./Datenanalyse und Machine Learning_ R versus Python_files/rmd_perf.js.Download"></script><meta name="rstudio_origin" content="127.0.0.1:41877"><script src="./Datenanalyse und Machine Learning_ R versus Python_files/rsiframe.js.Download"></script>
+  <title>Datenanalyse und Machine Learning:   R versus Python</title>
+
+  
+  
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc">
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <!--<base target="_blank">--><base href="." target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Datenanalyse und Machine Learning: <br> R versus Python',
+                        useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                      },
+
+      // Author information
+      presenters: [
+            {
+        name:  'Tim Schmittmann' ,
+        company: '',
+        gplus: '',
+        twitter: '',
+        www: '',
+        github: ''
+      },
+            ]
+    };
+  </script>
+
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+
+  </style>
+
+  <link rel="stylesheet" href="./Datenanalyse und Machine Learning_ R versus Python_files/tu-ioslides.css" type="text/css">
+
+<script type="text/javascript" src="./Datenanalyse und Machine Learning_ R versus Python_files/MathJax.js.Download"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head><span id="warning-container"><i data-reactroot=""></i></span>
+
+<body class="loaded"><div id="MathJax_Message" style="display: none;"></div>
+  <div>
+    <div data-display-if="!output.__reactivedoc__" data-ns-prefix="" style="display: none;">
+      <div id="rmd_loader_wrapper">
+        <div id="rmd_loader" style="">
+          <p>Please wait...</p>
+          <img src="./Datenanalyse und Machine Learning_ R versus Python_files/rmd_loader.gif">
+        </div>
+      </div>
+    </div>
+    <div id="__reactivedoc__" class="shiny-html-output shiny-bound-output">
+
+
+
+
+
+<slides>
+
+  <slide class="title-slide segue nobackground current" data-slide-num="1" data-total-slides="16">
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title="">Datenanalyse und Machine Learning: <br> R versus Python</h1>
+      <h2 data-config-subtitle=""><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter="">Tim Schmittmann<br></p>
+            <p style="margin-top: 6px; margin-left: -2px;">10 Dezember 2018</p>
+          </hgroup>
+  </slide>
+
+<div class="title-logos">
+<p><span class="top-logo tud-logo">
+<img src="./Datenanalyse und Machine Learning_ R versus Python_files/logo_weiss.svg" title=""></span> <span class="top-logo dd-concept-logo">
+<img src="./Datenanalyse und Machine Learning_ R versus Python_files/logo_dresden_concept.svg" title=""></span></p></div>
+
+<div class="content-logos">
+<p><span class="top-logo tud-logo">
+<img src="./Datenanalyse und Machine Learning_ R versus Python_files/logo_blau.svg" title=""></span> <span class="top-logo dd-concept-logo">
+<img src="./Datenanalyse und Machine Learning_ R versus Python_files/DDC-03.png" title=""></span></p></div>
+
+<footer>
+
+<span class="date">
+10.01.18</span> <span class="title">
+Datenanalyse und Machine Learning: R versus Python</span> <span class="slide-nr">
+&nbsp;</span>
+
+</footer>
+
+<slide class="next" data-slide-num="2" data-total-slides="16"><hgroup><h2>Gliederung</h2></hgroup><article id="gliederung">
+
+<ul>
+<li>Grundlagen</li>
+<li>Packages</li>
+<li>Trends</li>
+<li>Beispielproblem</li>
+<li>Fazit</li>
+</ul>
+
+</article></slide><slide class="far-next" data-slide-num="3" data-total-slides="16"><hgroup><h2>Grundlagen</h2></hgroup><article id="grundlagen">
+
+<img src="./Datenanalyse und Machine Learning_ R versus Python_files/timeline.png" title="fig:">
+
+<ul>
+<li>Universelle Skriptsprachen</li>
+<li>Interaktive Kommandozeileninterpreter</li>
+</ul>
+
+</article></slide><slide class="" data-slide-num="4" data-total-slides="16"><hgroup><h2>Grundlagen</h2></hgroup><article id="grundlagen-1">
+
+<div class="flex-columns">
+<div class="dynamic-image" style="width:48%; height: 40px; padding-left:15%;margin-bottom:20px">
+<img src="./Datenanalyse und Machine Learning_ R versus Python_files/1024px-Python-logo.png" title=""></div>
+
+<div class="dynamic-image" style="width:48%;  height:40px; padding-left:15%">
+<img src="./Datenanalyse und Machine Learning_ R versus Python_files/Rlogo.png" title=""></div></div>
+
+<ul class="flex-columns">
+
+<li>
+
+Multiparadigmatisch
+
+</li>
+
+<li>
+
+Eher Funktional
+
+</li>
+
+</ul>
+
+<span class="build">
+
+<ul class="flex-columns to-build">
+
+<li>
+
+Fokus auf Einfachheit und Produktivität
+
+</li>
+
+<li>
+
+Fokus auf Datenanalyse, Statistik und Grafiken
+
+</li>
+
+</ul>
+
+</span> <span class="build">
+
+<ul class="flex-columns to-build">
+
+<li>
+
+There should be one obvious way to do
+
+</li>
+
+<li>
+
+Many ways to do it
+
+</li>
+
+</ul>
+
+<p class="to-build"></p>
+
+</span></article></slide><slide class="" data-slide-num="5" data-total-slides="16"><hgroup><h2>Packages</h2></hgroup><article id="packages">
+
+<div class="flex-columns">
+<div class="dynamic-image" style="width:48%; height: 40px; padding-left:15%;margin-bottom:20px">
+<img src="./Datenanalyse und Machine Learning_ R versus Python_files/1024px-Python-logo.png" title=""></div>
+
+<div class="dynamic-image" style="width:48%;  height:40px; padding-left:15%">
+<img src="./Datenanalyse und Machine Learning_ R versus Python_files/Rlogo.png" title=""></div></div>
+
+<ul class="flex-columns">
+
+<li>
+
+PyPi
+
+</li>
+
+<li>
+
+CRAN
+
+</li>
+
+</ul>
+
+<span class="build">
+
+<ul class="flex-columns to-build">
+
+<li>
+
+161k packages<br> 7,8k scientific/engineering
+
+</li>
+
+<li>
+
+13,5k packages
+
+</li>
+
+</ul>
+
+</span> <span class="build">
+
+<ul class="flex-columns to-build">
+
+<li>
+
+Groß, "Standardpackages"
+
+</li>
+
+<li>
+
+Klein, funktional
+
+</li>
+
+</ul>
+
+<p class="to-build"></p>
+
+</span></article></slide><slide class="" data-slide-num="6" data-total-slides="16"><hgroup><h2>Trends</h2></hgroup><article id="trends">
+
+<div class="dynamic-image" style="position: absolute;left: 18%;
+    top: 28%;
+    height: 50vh;">
+<img src="./Datenanalyse und Machine Learning_ R versus Python_files/stackoverflow.jpg" title="fig:"></div>
+
+</article></slide><slide class="" data-slide-num="7" data-total-slides="16"><hgroup><h2>Trends</h2></hgroup><article id="trends-1">
+
+<div class="dynamic-image" style="position: absolute;left: 25%;top: 25%;">
+<img src="./Datenanalyse und Machine Learning_ R versus Python_files/top-analytics-data-science-machine-learning-software-2018-3yrs-539.jpg" title="fig:"></div>
+
+</article></slide><slide class="" data-slide-num="8" data-total-slides="16"><hgroup><h2>Beispielproblem</h2></hgroup><article id="beispielproblem">
+
+<ul>
+<li>Sentiment Analysis auf Tweets mit Emojis</li>
+<li>Varianten Binary Class und Multi-Class
+
+<div class="dynamic-image-width" style="width: 100%">
+<img src="./Datenanalyse und Machine Learning_ R versus Python_files/problem.png" title="fig:"></div></li>
+</ul>
+
+</article></slide><slide class="" data-slide-num="9" data-total-slides="16"><hgroup><h2>Daten sammeln</h2></hgroup><article id="daten-sammeln">
+
+<div class="dynamic-image" style="width:10%;height: 30px;position:absolute;left: 6.5%;top: 39%;">
+<img src="./Datenanalyse und Machine Learning_ R versus Python_files/1024px-Python-logo.png" title=""></div>
+
+<div class="dynamic-image" style="width: 20%;height: 30px;position:absolute;left: 6%;top: 60%;">
+<img src="./Datenanalyse und Machine Learning_ R versus Python_files/Rlogo.png" title=""></div>
+
+<div>
+<pre class="prettyprint lang-python"><span class="kwd">import</span><span class="pln"> twitter
+</span><span class="kwd">import</span><span class="pln"> pandas </span><span class="kwd">as</span><span class="pln"> pd
+api </span><span class="pun">=</span><span class="pln"> twitter</span><span class="pun">.</span><span class="typ">Api</span><span class="pun">(</span><span class="pln">consumer_key</span><span class="pun">,</span><span class="pln"> consumer_secret</span><span class="pun">,</span><span class="pln"> access_token</span><span class="pun">,</span><span class="pln"> access_secret</span><span class="pun">)</span><span class="pln">
+result </span><span class="pun">=</span><span class="pln"> api</span><span class="pun">.</span><span class="typ">GetSearch</span><span class="pun">(</span><span class="pln">raw_query</span><span class="pun">=</span><span class="str">"q=♥&amp;count=2"</span><span class="pun">)</span><span class="pln">
+df </span><span class="pun">=</span><span class="pln"> pd</span><span class="pun">.</span><span class="typ">DataFrame</span><span class="pun">([[</span><span class="pln">x</span><span class="pun">.</span><span class="typ">AsDict</span><span class="pun">()[</span><span class="str">"id"</span><span class="pun">],</span><span class="pln">x</span><span class="pun">.</span><span class="typ">AsDict</span><span class="pun">()[</span><span class="str">"text"</span><span class="pun">]]</span><span class="pln"> </span><span class="kwd">for</span><span class="pln"> x </span><span class="kwd">in</span><span class="pln"> result</span><span class="pun">])</span></pre></div>
+
+<div>
+<pre class="prettyprint lang-r"><span class="pln">library</span><span class="pun">(</span><span class="pln">twitteR</span><span class="pun">)</span><span class="pln">
+setup_twitter_oauth</span><span class="pun">(</span><span class="pln">consumer_key</span><span class="pun">,</span><span class="pln"> consumer_secret</span><span class="pun">,</span><span class="pln"> access_token</span><span class="pun">,</span><span class="pln"> access_secret</span><span class="pun">)</span><span class="pln">
+search </span><span class="pun">=</span><span class="pln"> twitteR</span><span class="pun">::</span><span class="pln">searchTwitter</span><span class="pun">(</span><span class="str">"♥"</span><span class="pun">,</span><span class="pln"> n </span><span class="pun">=</span><span class="pln"> </span><span class="lit">2</span><span class="pun">)</span><span class="pln">
+df </span><span class="pun">=</span><span class="pln"> twitteR</span><span class="pun">::</span><span class="pln">twListToDF</span><span class="pun">(</span><span class="pln">search</span><span class="pun">)[,</span><span class="pln">c</span><span class="pun">(</span><span class="str">"id"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"text"</span><span class="pun">)]</span></pre></div>
+
+<div>
+<pre>##   id           text                                    
+## 1 1.057767e+18 Wenn das Herz liebt &lt;U+2665&gt;&lt;U+270C&gt;    
+## 2 1.057766e+18 &lt;U+263A&gt; Gute Nacht Köln&lt;U+2665&gt;&lt;U+2665&gt;</pre></div>
+
+</article></slide><slide class="" data-slide-num="10" data-total-slides="16"><hgroup><h2>Daten speichern</h2></hgroup><article id="daten-speichern">
+
+<div class="dynamic-image" style="width:10%;height: 30px;position:absolute;left: 6.5%;top: 39%;">
+<img src="./Datenanalyse und Machine Learning_ R versus Python_files/1024px-Python-logo.png" title=""></div>
+
+<div class="dynamic-image" style="width: 20%;height: 30px;position:absolute;left: 6%;top: 55%;">
+<img src="./Datenanalyse und Machine Learning_ R versus Python_files/Rlogo.png" title=""></div>
+
+<div>
+<pre class="prettyprint lang-python"><span class="pln">df</span><span class="pun">.</span><span class="pln">to_csv</span><span class="pun">(</span><span class="str">"data.csv"</span><span class="pun">,</span><span class="pln"> sep</span><span class="pun">=</span><span class="str">";"</span><span class="pun">,</span><span class="pln"> encoding</span><span class="pun">=</span><span class="str">"UTF-8"</span><span class="pun">,</span><span class="pln">header</span><span class="pun">=[</span><span class="str">"id"</span><span class="pun">,</span><span class="str">"text"</span><span class="pun">],</span><span class="pln"> index</span><span class="pun">=</span><span class="kwd">False</span><span class="pun">)</span><span class="pln">
+df </span><span class="pun">=</span><span class="pln"> pd</span><span class="pun">.</span><span class="pln">read_csv</span><span class="pun">(</span><span class="str">"data.csv"</span><span class="pun">,</span><span class="pln"> sep</span><span class="pun">=</span><span class="str">";"</span><span class="pun">,</span><span class="pln"> encoding</span><span class="pun">=</span><span class="str">"UTF-8"</span><span class="pun">)</span></pre></div>
+
+<div>
+<pre class="prettyprint lang-r"><span class="pln">write.csv2</span><span class="pun">(</span><span class="pln">df</span><span class="pun">,</span><span class="pln"> </span><span class="str">"data.csv"</span><span class="pun">,</span><span class="pln"> row.names </span><span class="pun">=</span><span class="pln"> </span><span class="lit">FALSE</span><span class="pun">)</span><span class="pln">
+
+df </span><span class="pun">=</span><span class="pln"> read.csv</span><span class="pun">(</span><span class="str">"data.csv"</span><span class="pun">,</span><span class="pln"> sep</span><span class="pun">=</span><span class="str">';'</span><span class="pun">,</span><span class="pln"> skip</span><span class="pun">=</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> header</span><span class="pun">=</span><span class="lit">FALSE</span><span class="pun">,</span><span class="pln"> 
+              colClasses </span><span class="pun">=</span><span class="pln"> c</span><span class="pun">(</span><span class="str">"integer64"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"character"</span><span class="pun">),</span><span class="pln"> encoding</span><span class="pun">=</span><span class="str">"UTF-8"</span><span class="pun">)</span><span class="pln">
+names</span><span class="pun">(</span><span class="pln">df</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> c</span><span class="pun">(</span><span class="str">"id"</span><span class="pun">,</span><span class="str">"text"</span><span class="pun">)</span><span class="pln">
+df </span><span class="pun">=</span><span class="pln"> df</span><span class="pun">[,</span><span class="pln">c</span><span class="pun">(</span><span class="str">"id"</span><span class="pun">,</span><span class="str">"text"</span><span class="pun">)]</span></pre></div>
+
+</article></slide><slide class="" data-slide-num="11" data-total-slides="16"><hgroup><h2>Daten aufbereiten</h2></hgroup><article id="daten-aufbereiten">
+
+<div class="dynamic-image" style="width:10%;height: 30px;position:absolute;left: 6.5%;top: 39%;">
+<img src="./Datenanalyse und Machine Learning_ R versus Python_files/1024px-Python-logo.png" title=""></div>
+
+<div class="dynamic-image" style="width: 20%;height: 30px;position:absolute;left: 6%;top: 53.5%;">
+<img src="./Datenanalyse und Machine Learning_ R versus Python_files/Rlogo.png" title=""></div>
+
+<div>
+<pre class="prettyprint lang-python"><span class="pln">df </span><span class="pun">=</span><span class="pln"> df</span><span class="pun">.</span><span class="pln">replace</span><span class="pun">({</span><span class="str">'\n'</span><span class="pun">:</span><span class="pln"> </span><span class="str">' '</span><span class="pun">,</span><span class="pln"> </span><span class="str">'\r'</span><span class="pun">:</span><span class="pln"> </span><span class="str">' '</span><span class="pun">},</span><span class="pln"> regex</span><span class="pun">=</span><span class="kwd">True</span><span class="pun">)</span><span class="pln">
+df </span><span class="pun">=</span><span class="pln"> df</span><span class="pun">.</span><span class="pln">drop_duplicates</span><span class="pun">([</span><span class="str">'text'</span><span class="pun">])</span><span class="pln">
+df </span><span class="pun">=</span><span class="pln"> df</span><span class="pun">.</span><span class="pln">sort_index</span><span class="pun">(</span><span class="pln">ascending</span><span class="pun">=</span><span class="kwd">False</span><span class="pun">)</span><span class="pln">
+            </span></pre></div>
+
+<div>
+<pre class="prettyprint lang-r"><span class="pln">df</span><span class="pun">$</span><span class="pln">text </span><span class="pun">=</span><span class="pln"> gsub</span><span class="pun">(</span><span class="pln">pattern </span><span class="pun">=</span><span class="pln"> </span><span class="str">"\n"</span><span class="pun">,</span><span class="pln"> replacement </span><span class="pun">=</span><span class="pln"> </span><span class="str">" "</span><span class="pun">,</span><span class="pln"> df</span><span class="pun">$</span><span class="pln">text</span><span class="pun">)</span><span class="pln">
+df </span><span class="pun">=</span><span class="pln"> df</span><span class="pun">[!</span><span class="pln">duplicated</span><span class="pun">(</span><span class="pln">df</span><span class="pun">[,</span><span class="str">"text"</span><span class="pun">]),]</span><span class="pln">
+df </span><span class="pun">=</span><span class="pln"> df</span><span class="pun">[</span><span class="pln">order</span><span class="pun">(</span><span class="pln">df</span><span class="pun">$</span><span class="pln">id</span><span class="pun">,</span><span class="pln"> decreasing </span><span class="pun">=</span><span class="pln"> </span><span class="lit">TRUE</span><span class="pun">),]</span></pre></div>
+
+</article></slide><slide class="" data-slide-num="12" data-total-slides="16"><hgroup><h2>Daten aufbereiten</h2></hgroup><article id="daten-aufbereiten-1">
+
+<div class="dynamic-image" style="width:10%;height: 30px;position:absolute;left: 6.5%;top: 39%;">
+<img src="./Datenanalyse und Machine Learning_ R versus Python_files/1024px-Python-logo.png" title=""></div>
+
+<div class="dynamic-image" style="width: 20%;height: 30px;position:absolute;left: 6%;top: 59%;">
+<img src="./Datenanalyse und Machine Learning_ R versus Python_files/Rlogo.png" title=""></div>
+
+<div>
+<pre class="prettyprint lang-python"><span class="kwd">import</span><span class="pln"> emoji
+emoji_regex </span><span class="pun">=</span><span class="pln"> </span><span class="str">"|"</span><span class="pun">.</span><span class="pln">join</span><span class="pun">(</span><span class="pln">emoji</span><span class="pun">.</span><span class="pln">UNICODE_EMOJI</span><span class="pun">).</span><span class="pln">replace</span><span class="pun">(</span><span class="str">"*"</span><span class="pun">,</span><span class="str">"\*"</span><span class="pun">)</span><span class="pln">
+df</span><span class="pun">.</span><span class="pln">loc</span><span class="pun">[:,</span><span class="str">'target'</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> df</span><span class="pun">.</span><span class="pln">loc</span><span class="pun">[:,</span><span class="str">'text'</span><span class="pun">].</span><span class="pln">apply</span><span class="pun">(</span><span class="pln">extract_emojis</span><span class="pun">)</span><span class="pln">
+df</span><span class="pun">.</span><span class="pln">loc</span><span class="pun">[:,</span><span class="str">'text'</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> df</span><span class="pun">.</span><span class="pln">loc</span><span class="pun">[:,</span><span class="str">'text'</span><span class="pun">].</span><span class="pln">apply</span><span class="pun">(</span><span class="kwd">lambda</span><span class="pln"> text</span><span class="pun">:</span><span class="pln"> regex</span><span class="pun">.</span><span class="kwd">sub</span><span class="pun">(</span><span class="pln">emoji_regex</span><span class="pun">,</span><span class="str">""</span><span class="pun">,</span><span class="pln">text</span><span class="pun">))</span><span class="pln">            </span></pre></div>
+
+<div>
+<pre class="prettyprint lang-r"><span class="pln">df</span><span class="pun">[,</span><span class="pln"> </span><span class="str">"text"</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> gsub</span><span class="pun">(</span><span class="str">"&lt;U+FE0F&gt;"</span><span class="pun">,</span><span class="pln"> </span><span class="str">""</span><span class="pun">,</span><span class="pln"> df</span><span class="pun">[,</span><span class="pln"> </span><span class="str">"text"</span><span class="pun">],</span><span class="pln"> fixed</span><span class="pun">=</span><span class="lit">TRUE</span><span class="pun">)</span><span class="pln">
+df</span><span class="pun">[,</span><span class="pln"> </span><span class="str">"target"</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> str_extract_all</span><span class="pun">(</span><span class="pln">df</span><span class="pun">[,</span><span class="str">"text"</span><span class="pun">],</span><span class="pln"> </span><span class="str">'&lt;U\\+[0-9A-F]+&gt;'</span><span class="pun">)</span><span class="pln"> </span><span class="pun">%&gt;%</span><span class="pln"> 
+                      lapply</span><span class="pun">(</span><span class="pln">paste</span><span class="pun">,</span><span class="pln"> collapse </span><span class="pun">=</span><span class="pln"> </span><span class="str">","</span><span class="pun">)</span><span class="pln"> </span><span class="pun">%&gt;%</span><span class="pln">
+                      unlist</span><span class="pun">(</span><span class="pln">use.names</span><span class="pun">=</span><span class="lit">FALSE</span><span class="pun">)</span><span class="pln"> 
+df</span><span class="pun">[,</span><span class="str">"text"</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> gsub</span><span class="pun">(</span><span class="str">'&lt;U\\+[0-9A-F]+&gt;'</span><span class="pun">,</span><span class="pln"> </span><span class="str">""</span><span class="pun">,</span><span class="pln"> df</span><span class="pun">[,</span><span class="str">"text"</span><span class="pun">])</span></pre></div>
+
+<div>
+<pre>##             id                 text                     target
+## 1 1.057767e+18 Wenn das Herz liebt           &lt;U+2665&gt;,&lt;U+270C&gt;
+## 2 1.057766e+18      Gute Nacht Köln &lt;U+263A&gt;,&lt;U+2665&gt;,&lt;U+2665&gt;</pre></div>
+
+</article></slide><slide class="" data-slide-num="13" data-total-slides="16"><hgroup><h2></h2></hgroup><article>
+
+<div style="margin-top: -2em;">
+<iframe width="100%" height="400" class="shiny-frame" src="./Datenanalyse und Machine Learning_ R versus Python_files/saved_resource.html"></iframe></div>
+
+</article></slide><slide class="" data-slide-num="14" data-total-slides="16"><hgroup><h2>Fazit</h2></hgroup><article id="fazit">
+
+<ul class="build">
+<li class="to-build">Python für Anfänger</li>
+<li class="to-build">Wenn R, dann richtig</li>
+<li class="to-build">Auf die Packages achten</li>
+</ul>
+
+</article></slide><slide class="" data-slide-num="15" data-total-slides="16"><hgroup><h2></h2></hgroup><article>
+
+<div style="position:absolute; left: 24vw;top: 37vh;font-size: 2em;">
+<p>Fragen?</p></div>
+
+</article></slide><slide class="" data-slide-num="16" data-total-slides="16"><hgroup><h2>Literatur</h2></hgroup><article id="literatur">
+
+<div style="font-size: 0.7em">
+<ul>
+<li><a href="https://www.dataquest.io/blog/python-vs-r/" title="">https://www.dataquest.io/blog/python-vs-r/</a></li>
+<li><a href="https://www.datacamp.com/community/tutorials/r-or-python-for-data-analysis" title="">https://www.datacamp.com/community/tutorials/r-or-python-for-data-analysis</a></li>
+<li><a href="https://medium.com/@data_driven/python-vs-r-for-data-science-and-the-winner-is-3ebb1a968197" title="">https://medium.com/@data_driven/python-vs-r-for-data-science-and-the-winner-is-3ebb1a968197</a></li>
+<li><a href="https://jobsquery.it/stats/language/group" title="">https://jobsquery.it/stats/language/group</a></li>
+<li><a href="https://www.kdnuggets.com/2018/06/ecosystem-data-science-python-victory.html" title="">https://www.kdnuggets.com/2018/06/ecosystem-data-science-python-victory.html</a></li>
+<li><a href="https://www.kdnuggets.com/2018/05/poll-tools-analytics-data-science-machine-learning-results.html" title="">https://www.kdnuggets.com/2018/05/poll-tools-analytics-data-science-machine-learning-results.html</a></li>
+</ul></div></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+<div class="slide-area" id="prev-slide-area"></div><div class="slide-area" id="next-slide-area"></div></slides>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "mathjax-local/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+</div>
+  </div>
+
+
+
+</body></html>

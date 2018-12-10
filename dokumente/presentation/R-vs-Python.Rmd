@@ -1,5 +1,5 @@
 ---
-title: "Datenanalyse und Machine Learning:  R versus Python"
+title: "Datenanalyse und Machine Learning: <br> R versus Python"
 author: "Tim Schmittmann"
 date: "10 Dezember 2018"
 output: 
@@ -9,19 +9,23 @@ runtime: shiny
 
 css: tu-ioslides.css
 ---
+```{r, include=FALSE}
+# Only for 
+base_path='../../'
+
+```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(dplyr)
-library(bit64)
 consumer_key <- "Rcvp7SPl08t4t3ZNM8e7qBWy1"
 consumer_secret <- "NqulWUlD8KpwYiaVdRUXg1dXuraTATNRk7vEYW26o9SAmYc4b7"
 access_token <- "1403526518-5YNK1GGKJKWSh5BNSojGYmtfQ0ZWLyVGASpsWus"
 access_secret <- "z5vgcSyeWw4BnEVHu8yZzFTNL966dNDfoNFvVUrBTrdNu"
-
 ```
+
 ```{r, include=FALSE}
-mappings = read.csv("../data/manual_settings/emojis.csv", sep=';', encoding="UTF-8")
+print(paste0(base_path,"data/manual_settings/emojis.csv", sep=';', encoding="UTF-8"))
+mappings = read.csv(paste0(base_path,"data/manual_settings/emojis.csv"), sep=';', encoding="UTF-8")
 ```
 
 <div class="title-logos">
@@ -35,33 +39,111 @@ mappings = read.csv("../data/manual_settings/emojis.csv", sep=';', encoding="UTF
 </div>
 
 <footer>
-  <span class="date">12.01.18</span>
-  <span class="title">Schneller schicke statistikbasierte Webseiten mit R und Shiny</span>
+  <span class="date">10.01.18</span>
+  <span class="title">Datenanalyse und Machine Learning: R versus Python</span>
   <span class="slide-nr">&nbsp;</span>
 </footer>
 
 ## Gliederung
 
-- Problemstellung
-- Fakten
-- Vorbereitung
--- Entwicklungsumgebung
--- Erlernbarkeit
-- Datensammlung
-- Datenaufbereitung
-- Datenvisualisierung
--- Shiny
-- Machine Learning
+- Grundlagen
+- Packages
+- Trends
+- Beispielproblem
 - Fazit
 
+## Grundlagen
 
-## Slide with Bullets
+![](img/timeline.png)
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
+- Universelle Skriptsprachen
+- Interaktive Kommandozeileninterpreter
 
-## Slide with mixed Output
+## Grundlagen
+
+<div class="flex-columns">
+  <div class="dynamic-image" style="width:48%; height: 40px; padding-left:15%;margin-bottom:20px">![](img/1024px-Python-logo.png)</div>
+  <div class="dynamic-image" style="width:48%;  height:40px; padding-left:15%">![](img/Rlogo.png)</div>
+</div>
+<ul class="flex-columns">
+  <li>Multiparadigmatisch</li>
+  <li>Eher Funktional</li>
+</ul>
+<span class="build">
+<ul class="flex-columns to-build">
+  <li>Fokus auf Einfachheit und Produktivität</li>
+  <li>Fokus auf Datenanalyse, Statistik und Grafiken</li>
+</ul>
+</span>
+<span class="build">
+<ul class="flex-columns to-build">
+  <li>There should be one obvious way to do</li>
+  <li>Many ways to do it</li>
+</ul>
+</span>
+
+## Packages
+
+<div class="flex-columns">
+<div class="dynamic-image" style="width:48%; height: 40px; padding-left:15%;margin-bottom:20px">![](img/1024px-Python-logo.png)</div>
+  <div class="dynamic-image" style="width:48%;  height:40px; padding-left:15%">![](img/Rlogo.png)</div>
+</div>
+<ul class="flex-columns">
+  <li>PyPi</li>
+  <li>CRAN</li>
+</ul>
+<span class="build">
+<ul class="flex-columns to-build">
+  <li>161k packages<br>
+  7,8k scientific/engineering </li>
+  <li>13,5k packages</li>
+</ul>
+</span>
+<span class="build">
+<ul class="flex-columns to-build">
+  <li>Groß, "Standardpackages"</li>
+  <li>Klein, funktional</li>
+</ul>
+</span>
+
+## Trends
+<div class="dynamic-image" style="position: absolute;left: 18%;
+    top: 28%;
+    height: 50vh;">
+![](img/stackoverflow.jpg)
+
+</div>
+
+
+```{r, echo=FALSE, eval=FALSE}
+- Heute Stackoverflow python 1,07 Mio, r 266k
+```
+
+## Trends
+
+<div class="dynamic-image" style="position: absolute;left: 25%;top: 25%;">
+![](img/top-analytics-data-science-machine-learning-software-2018-3yrs-539.jpg)
+
+
+</div>
+```{r,echo=FALSE, eval=FALSE}
+#Indeed.com: R Data Analyst 334 Jobs, Python Data Analyst 408 Jobs
+- Durchschnittsgehalt bei 60k Jobangeboten Weltweit:
+  R: $118k bei 750 Jobs 
+  Python: $110k bei 6100 Jobs
+```
+
+## Beispielproblem
+
+- Sentiment Analysis auf Tweets mit Emojis
+- Varianten Binary Class und Multi-Class
+<div style="width: 100%" class="dynamic-image-width">
+![](img/problem.png)
+</div>
+
+## Daten sammeln
+<div class="dynamic-image" style="width:10%;height: 30px;position:absolute;left: 6.5%;top: 39%;">![](img/1024px-Python-logo.png)</div>
+<div class="dynamic-image" style="width: 20%;height: 30px;position:absolute;left: 6%;top: 60%;">![](img/Rlogo.png)</div>
 
 <div>
 ```{python eval=FALSE}
@@ -102,8 +184,10 @@ df[,"text"] <- sapply(df["text"], substring, 0,50) %>%
 df
 ```
 
-## reading and saving files
+## Daten speichern
 
+<div class="dynamic-image" style="width:10%;height: 30px;position:absolute;left: 6.5%;top: 39%;">![](img/1024px-Python-logo.png)</div>
+<div class="dynamic-image" style="width: 20%;height: 30px;position:absolute;left: 6%;top: 55%;">![](img/Rlogo.png)</div>
 <div>
 ```{python eval=FALSE}
 df.to_csv("data.csv", sep=";", encoding="UTF-8",header=["id","text"], index=False)
@@ -124,8 +208,10 @@ df = df[,c("id","text")]
 ```
 </div>
 
-## datenaufbereitung
+## Daten aufbereiten
 
+<div class="dynamic-image" style="width:10%;height: 30px;position:absolute;left: 6.5%;top: 39%;">![](img/1024px-Python-logo.png)</div>
+<div class="dynamic-image" style="width: 20%;height: 30px;position:absolute;left: 6%;top: 53.5%;">![](img/Rlogo.png)</div>
 <div>
 ```{python eval=FALSE}
 df = df.replace({'\n': ' ', '\r': ' '}, regex=True)
@@ -144,8 +230,10 @@ df = df[order(df$id, decreasing = TRUE),]
 ```
 </div>
 
-## datenaufbereitung
+## Daten aufbereiten
 
+<div class="dynamic-image" style="width:10%;height: 30px;position:absolute;left: 6.5%;top: 39%;">![](img/1024px-Python-logo.png)</div>
+<div class="dynamic-image" style="width: 20%;height: 30px;position:absolute;left: 6%;top: 59%;">![](img/Rlogo.png)</div>
 <div>
 ```{python eval=FALSE}
 import emoji
@@ -173,11 +261,11 @@ print(df)
 ```
 </div>
 
-## Slide with Plot
+--------------------
 ```{r include=FALSE}
-importdf = read.csv("../data/trainingssets/top_1000_emoji_tweets_03_12_18_6_labels_mapped.csv", sep=';', skip=1, header=FALSE, colClasses = c("integer64", "character", "character"), encoding="UTF-8")
-names(importdf) = c("id","text", "target")
-importdf = importdf[,c("id","text", "target")]
+#importdf = read.csv(paste0(base_path,"data/trainingssets/top_1000_emoji_tweets_03_12_18_6_labels_mapped.csv", sep=';', skip=1, #header=FALSE, colClasses = c("integer64", "character", "character"), encoding="UTF-8"))
+#names(importdf) = c("id","text", "target")
+#importdf = importdf[,c("id","text", "target")]
 #multi_class_labels=c('<U+1F602>','<U+2764>','<U+1F4AA>')
 # <U+0001F602>, <U+2764>, #U+0001F914#, U+0001F4AA, #U+0001F644#
 
@@ -195,11 +283,15 @@ importdf = importdf[,c("id","text", "target")]
 #grid.draw(venn.plot)
 ```
 
+<div style="margin-top: -2em;">
 ```{r echo=FALSE}
 library(shiny)
 library(VennDiagram)
+library(dplyr)
+library(bit64)
+library(stringr)
 
-importdf = read.csv("../data/trainingssets/top_1000_emoji_tweets_03_12_18_6_labels_mapped.csv", sep=';', skip=1, header=FALSE, colClasses = c("integer64", "character", "character"), encoding="UTF-8")
+importdf = read.csv(paste0(base_path,"data/trainingssets/top_1000_emoji_tweets_03_12_18_6_labels_mapped.csv"), sep=';', skip=1, header=FALSE, colClasses = c("integer64", "character", "character"), encoding="UTF-8")
 names(importdf) = c("id","text", "target")
 importdf = importdf[,c("id","text", "target")]
 
@@ -252,4 +344,27 @@ server <- function(input, output) {
 # 3) Create Shiny app with UI and server logic
 shinyApp(ui = ui, server = server)
 ```
+</div>
 
+## Fazit
+
+>- Python für Anfänger
+>- Wenn R, dann richtig
+>- Auf die Packages achten
+
+--------------
+
+<div style="position:absolute; left: 24vw;top: 37vh;font-size: 2em;">
+Fragen?
+</div>
+
+## Literatur
+
+<div style="font-size: 0.7em">
+- https://www.dataquest.io/blog/python-vs-r/
+- https://www.datacamp.com/community/tutorials/r-or-python-for-data-analysis
+- https://medium.com/@data_driven/python-vs-r-for-data-science-and-the-winner-is-3ebb1a968197
+- https://jobsquery.it/stats/language/group
+- https://www.kdnuggets.com/2018/06/ecosystem-data-science-python-victory.html
+- https://www.kdnuggets.com/2018/05/poll-tools-analytics-data-science-machine-learning-results.html
+</div>
