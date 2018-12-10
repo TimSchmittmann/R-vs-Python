@@ -245,6 +245,18 @@ slides > slide.current:not(.title-slide) ~ .title-logos {
   display: none;  
 }
 
+.faculty {
+    font-size: 0.40em;
+    position: absolute;
+    top: 20.4%;
+    left: calc((100vw - 70em) / 2 + 70em * 5 / 100);
+    color: #002557
+}
+
+slides > slide.current.title-slide ~ .faculty {
+    color: #FFF
+} 
+
 .top-logo > img {
   position: absolute;
   top: calc((100vh - 700px) / 2 + 3vh);

@@ -32,12 +32,13 @@ mappings = read.csv(paste0(base_path,"data/manual_settings/emojis.csv"), sep=';'
   <span class="top-logo tud-logo">![](img/logo_weiss.svg)</span>
   <span class="top-logo dd-concept-logo">![](img/logo_dresden_concept.svg)</span>
 </div>
-
 <div class="content-logos">
   <span class="top-logo tud-logo">![](img/logo_blau.svg)</span>
   <span class="top-logo dd-concept-logo">![](img/DDC-03.png)</span>
 </div>
-
+<span class="faculty">
+<strong>Fakultät Informatik</strong> Institut für Angewandte Informatik, Professur für technische Informationssysteme
+</span>
 <footer>
   <span class="date">10.01.18</span>
   <span class="title">Datenanalyse und Machine Learning: R versus Python</span>
